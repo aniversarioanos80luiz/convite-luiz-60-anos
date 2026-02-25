@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="sol.png">
+<!-- 
+E-mail: aniversarioanos80luiz@gmail.com
+Senha: Anos80marques@
+-->
+
+<title>Luiz Marques - 60 Anos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Orbitron', sans-serif;
+background: linear-gradient(180deg,#0f0c29,#302b63,#24243e);
+color:white;
+overflow-x:hidden;
+overflow-y:auto;
+}
+
+/* TELA INICIAL */
+
+#telaInicial{
+
+position:fixed;
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+background: linear-gradient(180deg,#0f0c29,#302b63,#24243e);
+
+z-index:10;
+
+}
+
+#tituloInicial{
+
+font-size:50px;
+
+color:#ff00ff;
+
+text-shadow:
+0 0 10px #ff00ff,
+0 0 30px #ff00ff;
+
+margin-bottom:20px;
+
+}
+
+#subInicial{
+
+font-size:25px;
+color:#00ffff;
+margin-bottom:40px;
+
+}
+
+#botaoEntrar{
+
+padding:20px 50px;
+
+font-size:25px;
+
+border:none;
+
+border-radius:40px;
+
+background:linear-gradient(45deg,#ff00ff,#00ffff);
+
+color:white;
+
+cursor:pointer;
+
+box-shadow:0 0 20px #ff00ff;
+
+transition:0.3s;
+
+}
+
+#botaoEntrar:hover{
+
+transform:scale(1.1);
+
+box-shadow:0 0 40px #00ffff;
+
+}
+
+/* CONVITE */
+
+#convite{
+
+display:none;
+text-align:center;
+padding-top:60px;
+
+}
+
+h1{
+
+font-size:50px;
+
+color:#ff00ff;
+
+text-shadow:
+0 0 10px #ff00ff,
+0 0 30px #ff00ff;
+
+}
+
+h2{
+
+font-size:30px;
+
+color:#00ffff;
+
+animation:pulse 2s infinite;
+
+}
+
+.info{
+
+font-size:22px;
+margin:10px;
+
+}
+
+#contador{
+
+font-size:28px;
+
+color:#ffff00;
+
+margin-top:20px;
+
+}
+
+/* GRID */
+
+.grid{
+
+position:fixed;
+
+bottom:0;
+
+width:100%;
+
+height:50%;
+
+background:
+linear-gradient(rgba(0,255,255,0.3) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,255,255,0.3) 1px, transparent 1px);
+
+background-size:40px 40px;
+
+transform: perspective(400px) rotateX(60deg);
+
+animation:gridMove 10s linear infinite;
+
+pointer-events:none;
+
+}
+
+/* BOTÕES */
+
+button{
+
+margin-top:20px;
+
+padding:15px 35px;
+
+font-size:18px;
+
+border:none;
+
+border-radius:30px;
+
+background:linear-gradient(45deg,#ff00ff,#00ffff);
+
+color:white;
+
+cursor:pointer;
+
+}
+
+input{
+
+margin-top:20px;
+
+padding:15px;
+
+border-radius:30px;
+
+border:none;
+
+font-size:18px;
+
+text-align:center;
+
+}
+
+/* ANIMAÇÕES */
+
+@keyframes gridMove{
+
+from{background-position:0 0}
+
+to{background-position:0 40px}
+
+}
+
+@keyframes pulse{
+
+0%{transform:scale(1)}
+
+50%{transform:scale(1.05)}
+
+100%{transform:scale(1)}
+
+}
+
+.fadeOut{
+
+animation:fadeOut 1s forwards;
+
+}
+
+@keyframes fadeOut{
+
+to{
+
+opacity:0;
+visibility:hidden;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="musica" loop>
+<source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<!-- TELA INICIAL -->
+
+<div id="telaInicial">
+
+<div id="tituloInicial">Luiz Marques</div>
+
+<div id="subInicial">60 Anos</div>
+
+<button id="botaoEntrar" onclick="entrar()">ACESSAR CONVITE</button>
+
+</div>
+
+<!-- CONVITE -->
+
+<div id="convite">
+
+	<div id="confirmacaoFinal" style="
+		display:none;
+		position:fixed;
+		top:50%;
+		left:50%;
+		transform:translate(-50%,-50%);
+		font-size:40px;
+		color:#00ffff;
+		text-shadow:0 0 20px #00ffff,0 0 40px #00ffff;
+		text-align:center;
+		z-index:20;
+		">
+	</div>
+
+<h1>Luiz Marques</h1>
+
+<h2>60 Anos</h2>
+
+<div class="info">Data: 02 de Maio de 2026</div>
+
+<div class="info">Horário: 20h</div>
+
+<div class="info">Local: Espaço Luiz Garçom</div>
+
+<div class="info">Tema: Anos 80</div>
+
+<div id="contador"></div>
+
+<button onclick="maps()">Abrir Localização</button>
+
+<br>
+
+<button onclick="mostrar()">Confirmar Presença</button>
+
+<div id="form" style="display:none;">
+
+<input id="nome" placeholder="Seu nome">
+
+<br>
+
+<button onclick="confirmar()">Confirmar</button>
+
+<div id="msg" style="margin-top:25px; font-size:20px;"></div>
+
+</div>
+
+</div>
+
+<div class="grid"></div>
+
+<script>
+
+// ENTRAR
+
+function entrar(){
+
+document.getElementById("musica").play();
+
+document.getElementById("telaInicial").classList.add("fadeOut");
+
+document.getElementById("convite").style.display="block";
+
+}
+
+// CONTADOR
+
+var dataEvento = new Date("May 2, 2026 20:00:00").getTime();
+
+setInterval(function(){
+
+var agora = new Date().getTime();
+
+var distancia = dataEvento - agora;
+
+var dias = Math.floor(distancia/(1000*60*60*24));
+var horas = Math.floor((distancia%(1000*60*60*24))/(1000*60*60));
+var minutos = Math.floor((distancia%(1000*60*60))/(1000*60));
+var segundos = Math.floor((distancia%(1000*60))/1000);
+
+document.getElementById("contador").innerHTML =
+dias+"d "+horas+"h "+minutos+"m "+segundos+"s";
+
+},1000);
+
+// MAPS
+
+function maps(){
+
+window.open("https://maps.app.goo.gl/vfwNDudW3VvetPfr6");
+
+}
+
+// FORM
+
+function mostrar(){
+
+document.getElementById("form").style.display="block";
+
+}
+
+// CONFIRMAR
+
+function confirmar(){
+
+var nome=document.getElementById("nome").value;
+
+if(nome.trim()==""){
+
+document.getElementById("msg").innerHTML=
+"<span style='color:#ff00ff'>Digite seu nome</span>";
+
+return;
+
+}
+
+document.getElementById("msg").innerHTML=
+"<span style='color:#ffff00'>Confirmando...</span>";
+
+fetch("https://script.google.com/macros/s/AKfycbzwGe61rfpBzcNSABuYz6hulSM5v8LMWOkbZPDS8CqdRphFrkP-mWoGYp5xv1noyvg2/exec",{
+
+method:"POST",
+body:JSON.stringify({nome:nome})
+
+})
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("msg").innerHTML=
+"<span style='color:#00ffff;text-shadow:0 0 10px #00ffff;'>Presença confirmada, "+nome+"! 🎉</span>";
+
+document.getElementById("nome").value="";
+
+})
+.catch(()=>{
+
+document.getElementById("msg").innerHTML=
+"<span style='color:#00ffff;text-shadow:0 0 10px #00ffff;'>Presença confirmada, "+nome+"! 🎉</span>";
+
+document.getElementById("nome").value="";
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
